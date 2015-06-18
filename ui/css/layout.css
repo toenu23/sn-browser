@@ -1,0 +1,179 @@
+/*!
+ * Based on:
+ * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+#wrapper {
+  transition: all 0.5s ease;
+  padding-left: 250px
+}
+
+#sidebar-wrapper {
+  /* Set direction to rtl to make scrollbars appear on the left */
+  /* Is overridden back to ltr at .sidebar-nav */
+  direction:rtl;
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 0;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #000;
+  transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  width: 250px;
+}
+
+#page-content-wrapper {
+  width: 100%;
+  position: absolute;
+  padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  margin-right: -250px;
+}
+
+.sidebar-nav {
+  direction:ltr;
+  position: absolute;
+  top: 0;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar-nav li {
+  text-indent: 20px;
+  line-height: 40px;
+}
+
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  color: #999999;
+  text-align:right;
+  padding-right:20px;
+}
+
+.sidebar-nav li a:hover {
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+  text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+  height: 60px;
+  font-size: 18px;
+  line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+  color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+  color: #fff;
+  background: none;
+}
+
+#wrapper.toggled {
+  padding-left: 50px;
+}
+
+#sidebar-wrapper {
+  width: 250px;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  width: 50px;
+}
+
+#page-content-wrapper {
+  padding:0;
+  position: relative;
+}
+
+#wrapper.toggled #page-content-wrapper {
+  position: relative;
+  margin-right: 0;
+}
+
+.favicon {
+  margin-left:18px;
+  width:16px;
+  height:16px;
+}
+
+.sidebar-title {
+  margin-right: -22px;
+  float: left;
+  width: 192px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-subtitle {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-right: 35px;
+  line-height:10px;
+  padding-bottom:10px;
+}
+
+.sidebar-closeicon {
+  float: left;
+  margin-left: -25px;
+  margin-right: -15px;
+}
+
+.content-wrapper {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.content-frame {
+  border: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.force-redraw {
+  width: 99.9%;
+}
+
+/*
+ * Scrollbars
+ */
+::-webkit-scrollbar {
+  height: 12px;
+  width: 8px;
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #393812;
+  -webkit-border-radius: 1ex;
+  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+}
+
+::-webkit-scrollbar-corner {
+  background: #000;
+}
+

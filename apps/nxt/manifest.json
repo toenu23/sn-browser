@@ -1,0 +1,9 @@
+{
+  "name":"Nxt Client",
+  "description":"Nxt Wallet",
+  "active":true,
+  "version":"v0.1",
+  "author":"",
+  "website":"",
+  "nodeintegration":false
+}

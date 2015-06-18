@@ -1,0 +1,9 @@
+{
+  "name": "supernet",
+  "version": "0.0.1",
+  "main": "main.js",
+  "dependencies": {
+    "async": "^1.0.0",
+    "log": "^1.4.0"
+  }
+}

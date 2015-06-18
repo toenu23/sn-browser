@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MainApp">
+  <head>
+    <meta charset="utf-8">
+    <title>SuperNET Browser</title>
+
+    <link href="css/3rdparty/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/layout.css" rel="stylesheet">
+
+    <script>
+      window.$ = window.jQuery = require('./js/3rdparty/jquery.min.js');
+    </script>
+    <script src="js/3rdparty/bootstrap.min.js"></script>
+    <script src="js/3rdparty/angular.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="js/app.js"></script>
+
+  </head>
+  <body>
+    <div ng-controller="TabsCtrl" id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+            <a href="#menu-toggle" id="menu-toggle">
+              <div class="sidebar-title" style="background-image: url(./img/logo-supernet-white.png);">
+              </div>
+              <div><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            </a>
+          </li>
+          <li ng-repeat-start="tab in tabs" ng-mouseenter="tab._showclose = true" ng-mouseleave="tab._showclose = false">
+            <a href="javascript:void(0)" ng-click="selectTab(tab.id)" title="{{ tab.title }}">
+              <div class="sidebar-title">
+                <div class="sidebar-closeicon" ng-click="closeTab(tab.id)" ng-show="tab._showclose && tab.id != 'home'">
+                  <span class="glyphicon glyphicon-remove"></span>
+                </div>
+                {{ tab.title }}
+              </div>
+              <div>
+                <img ng-if="tab.favicon" ng-src="{{ tab.favicon }}" class="favicon" />
+                <span ng-if="!tab.favicon" ng-class="'glyphicon glyphicon-' + tab.manifest.icon"></span>
+              </div>
+              <p class="small sidebar-subtitle" ng-show="tab.subtitle">{{ tab.subtitle }}</p>
+            </a>
+          </li>
+          <li ng-repeat-end></li>
+        </ul>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div ng-repeat="tab in tabs" class="row">
+            <div ng-show="tab.id == selectedTab" class="col-lg-12 content-wrapper">
+              <webview ng-if="tab.manifest.nodeintegration" id="{{ tab.id }}" src="{{ getTabSrc(tab) }}"
+                       class="content-frame" webviewinit nodeintegration></webview>
+              <webview ng-if="!tab.manifest.nodeintegration" id="{{ tab.id }}" src="{{ getTabSrc(tab) }}"
+                      class="content-frame" webviewinit></webview>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Menu Toggle Script -->
+    <script>
+    var toggled;
+    $('#menu-toggle').click(function(e) {
+      e.preventDefault();
+      $('#wrapper').toggleClass('toggled');
+      if (!toggled) {
+        setTimeout(function() {
+          $('.sidebar-subtitle').hide();
+          $('.sidebar-tb').removeClass('sidebar-tb-item-expanded');
+        }, 500);
+      } else {
+        $('.sidebar-subtitle').show();
+        $('.sidebar-tb').addClass('sidebar-tb-item-expanded');
+      }
+      toggled = !toggled;
+    });
+    </script>
+  </body>
+</html>
