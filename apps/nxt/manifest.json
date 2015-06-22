@@ -1,9 +1,8 @@
 {
   "name":"Nxt Client",
-  "description":"Nxt Wallet",
+  "description":"Display the default Nxt client",
   "active":true,
   "version":"v0.1",
-  "author":"",
-  "website":"",
+  "website":"http://nowebsite.xyz",
   "nodeintegration":false
 }

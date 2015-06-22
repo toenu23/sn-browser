@@ -1,0 +1,31 @@
+*, *:before, *:after {
+  box-sizing: border-box !important;
+}
+
+.apps-container {
+  position: absolute;
+  left: 10px;
+  padding-left: 12px;
+  right: 0px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.apps-row {
+  -webkit-column-width: 18em;
+  -webkit-column-gap: 1em;
+  padding-right: 20px;
+}
+
+.apps-item {
+  display: inline-block;
+  padding: .25rem;
+  width: 100%; 
+  cursor: pointer;
+}
+
+.well {
+  position: relative;
+  display: block;
+}
+

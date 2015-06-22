@@ -1,0 +1,11 @@
+{
+  "id":"apps",
+  "name":"Apps",
+  "description":"List of apps",
+  "active":true,
+  "version":"v0.1",
+  "author":"toenu",
+  "website":"http://nowebsite.xyz",
+  "nodeintegration":true,
+  "icon":"cubes"
+}

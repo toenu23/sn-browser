@@ -1,6 +1,6 @@
 {
-  "name":"Test",
-  "description":"Test app",
+  "name":"Hello World",
+  "description":"Hello World App",
   "active":true,
   "version":"v0.1",
   "author":"toenu",

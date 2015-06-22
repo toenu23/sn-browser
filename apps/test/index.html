@@ -1,1 +1,33 @@
-hello world!
+<html>
+<head>
+
+<script type="text/javascript" src="../supernet.js"></script>
+
+<script>
+var sn = new SuperNET({ host: '131.72.136.251' });
+alert(sn);
+var query = { plugin: 'echodemo', method: 'echo' };
+sn.request(query, function(err, resp) {
+//  alert(err);
+  console.log(JSON.stringify(resp));
+});
+</script>
+<!--<script>
+var supernet = new SuperNET({ host: '131.72.136.251' });
+
+/*supernet.nxt({ requestType: 'setAlias', aliasName: 'sdjhf', secretPhrase: 'sdfsdf' }, function(err, resp) {
+  alert(err);
+  alert(resp);
+});
+*/
+var query = { plugin: 'echodemo', method: 'echo' };
+supernet.request(query, function(err, resp) {
+//  alert(err);
+  document.write(JSON.stringify(resp));
+});
+</script>-->
+</head>
+<body>
+  hello world!
+</body>
+</html>

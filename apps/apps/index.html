@@ -1,0 +1,31 @@
+<!doctype html>
+<html ng-app="MainApp">
+<head>
+
+    <link href="../../ui/css/3rdparty/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <script src="../../ui/js/3rdparty/angular.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="js/app.js"></script>
+
+</head>
+<body>
+  <div ng-controller="AppsCtrl" class="container-fluid">
+    <div class="apps-container">
+      <div class="row apps-row">
+        <div class="apps-item" ng-repeat="app in apps" ng-click="openApp(app)">
+          <div class="well">
+            <p class="text-center"><img src="http://placehold.it/250x150" class="img-thumbnail" /></p>
+              <h4><a href>{{ app.name }}</a></h4>
+              <p>{{ app.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

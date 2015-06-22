@@ -1,11 +1,12 @@
 {
   "id":"home",
-  "name":"Dashboard",
-  "description":"List of apps",
+  "name":"Home",
+  "description":"SuperNET Multiwallet",
   "active":true,
   "version":"v0.1",
-  "author":"toenu",
-  "website":"http://nowebsite.xyz",
-  "nodeintegration":true,
-  "icon":"home"
+  "author":"",
+  "website":"https://supernet.org",
+  "nodeintegration":false,
+  "icon":"home",
+  "main":"supernet.html"
 }
