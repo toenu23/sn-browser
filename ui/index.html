@@ -5,6 +5,7 @@
     <title>SuperNET Browser</title>
 
     <link href="css/3rdparty/bootstrap.min.css" rel="stylesheet">
+    <link href="css/3rdparty/font-awesome.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/layout.css" rel="stylesheet">
@@ -26,22 +27,23 @@
         <ul class="sidebar-nav">
           <li class="sidebar-brand">
             <a href="#menu-toggle" id="menu-toggle">
-              <div class="sidebar-title" style="background-image: url(./img/logo-supernet-white.png);">
+              <div class="sidebar-title sidebar-logo"></div>
+              <div><!--<span class="glyphicon glyphicon-menu-hamburger"></span>-->
+                <span class="fa fa-fw fa-bars fa-lg" style="margin-right:7px;"></span>
               </div>
-              <div><span class="glyphicon glyphicon-menu-hamburger"></span></div>
             </a>
           </li>
           <li ng-repeat-start="tab in tabs" ng-mouseenter="tab._showclose = true" ng-mouseleave="tab._showclose = false">
             <a href="javascript:void(0)" ng-click="selectTab(tab.id)" title="{{ tab.title }}">
               <div class="sidebar-title">
-                <div class="sidebar-closeicon" ng-click="closeTab(tab.id)" ng-show="tab._showclose && tab.id != 'home'">
+                <div class="sidebar-closeicon" ng-click="closeTab(tab.id)" ng-show="tab._showclose && !tab.isUncloseable">
                   <span class="glyphicon glyphicon-remove"></span>
                 </div>
                 {{ tab.title }}
               </div>
               <div>
                 <img ng-if="tab.favicon" ng-src="{{ tab.favicon }}" class="favicon" />
-                <span ng-if="!tab.favicon" ng-class="'glyphicon glyphicon-' + tab.manifest.icon"></span>
+                <span ng-if="!tab.favicon" ng-class="'sidebar-icon fa fa-fw fa-' + tab.manifest.icon"></span>
               </div>
               <p class="small sidebar-subtitle" ng-show="tab.subtitle">{{ tab.subtitle }}</p>
             </a>
@@ -59,7 +61,7 @@
               <webview ng-if="tab.manifest.nodeintegration" id="{{ tab.id }}" src="{{ getTabSrc(tab) }}"
                        class="content-frame" webviewinit nodeintegration></webview>
               <webview ng-if="!tab.manifest.nodeintegration" id="{{ tab.id }}" src="{{ getTabSrc(tab) }}"
-                      class="content-frame" webviewinit></webview>
+                       class="content-frame" webviewinit></webview>
             </div>
           </div>
         </div>

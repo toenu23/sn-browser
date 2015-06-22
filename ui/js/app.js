@@ -1,5 +1,6 @@
-// Load meta info of home "app"
-var homeApp = require('../apps/home/manifest.json');
+// Load meta info of default apps
+var appHome = require('../apps/home/manifest.json');
+var appApps = require('../apps/apps/manifest.json');
 
 var app = angular.module('MainApp', []);
 
@@ -8,9 +9,12 @@ var appController = function($scope, $timeout, $sce) {
   $scope.selectedTab = 'home';
 
   $scope.getTabSrc = function(tab) {
+    var file = tab.manifest.main
+      ? '/' + tab.manifest.main
+      : '/index.html';
     var src = (tab.manifest && tab.manifest.url)
       ? tab.manifest.url
-      : '../apps/' + tab.manifest.id + '/index.html';
+      : '../apps/' + tab.manifest.id + file;
     return $sce.trustAsResourceUrl(src);
   };
 
@@ -47,9 +51,15 @@ var appController = function($scope, $timeout, $sce) {
   $scope.tabs = [
     {
       id: 'home',
-      title: homeApp.name,
+      title: appHome.name,
       isUncloseable: true,
-      manifest: homeApp,
+      manifest: appHome,
+    },
+    {
+      id: 'apps',
+      title: appApps.name,
+      isUncloseable: true,
+      manifest: appApps,
     },
   ];
 };
@@ -76,6 +86,8 @@ var webviewInit = function($timeout) {
 
     // IPC messages
     webview.addEventListener('ipc-message', ipcHandler);
+
+    //webview.openDevTools();
 
     // Webview logged a message
     webview.addEventListener('console-message', function(e) {
