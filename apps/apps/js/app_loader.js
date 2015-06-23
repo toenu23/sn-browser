@@ -3,7 +3,6 @@ module.exports = function(cb) {
   var fs = require('fs');
   var async = require('async');
   var apps = [];
-//  var baseDir = './apps/';
   var baseDir = __dirname + '/../../';
 
   /*
