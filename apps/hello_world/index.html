@@ -1,0 +1,62 @@
+<!doctype>
+<html>
+<head>
+<link href="bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="jquery.min.js"></script>
+<script>
+var app = new App();
+$(document).ready(function() {
+
+  $('#setTitleForm').submit(function(e) {
+    e.preventDefault();
+    var text = $('#title').val();
+    app.setTitle(text);
+  });
+
+  $('#setSubtitleForm').submit(function(e) {
+    e.preventDefault();
+    var text = $('#subtitle').val();
+    app.setSubtitle(text);
+  });
+
+  $('#setIconForm').submit(function(e) {
+    e.preventDefault();
+    var icons = ['diamond','fighter-jet','bicycle','leaf','glass','sun-o','user-secret'];
+    var rand = Math.floor(Math.random() * icons.length);
+    app.setIcon(icons[rand]);
+  });
+
+});
+</script>
+</head>
+<body>
+<div class="container">
+
+  <h1>hello world!</h1>
+
+  <div class="panel panel-default">
+    <form class="panel-body form-inline" id="setTitleForm">
+      <p>Set the title of this tab:</p>
+      <input class="form-control" type="text" id="title" placeholder="Tab title ..." />
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+
+  <div class="panel panel-default">
+    <form class="panel-body form-inline" id="setSubtitleForm">
+      <p>Set the subtitle text:</p>
+      <input class="form-control" type="text" id="subtitle" placeholder="Tab subtitle ..." />
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+
+  <div class="panel panel-default">
+    <form class="panel-body form-inline" id="setIconForm">
+      <p>Set random icon:</p>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+
+</div>
+</body>
+</html>
