@@ -1,0 +1,9 @@
+{
+  "name":"WebGL Example 2",
+  "description":"Airhockey Game",
+  "active":true,
+  "version":"v0.1",
+  "website":"https://github.com/MortimerGoro/AirHockeyWebGL",
+  "nodeintegration":false,
+  "icon":"gamepad"
+}

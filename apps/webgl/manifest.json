@@ -1,0 +1,9 @@
+{
+  "name":"WebGL Example",
+  "description":"Animated Globe",
+  "active":true,
+  "version":"v0.1",
+  "website":"http://webglearth.com",
+  "nodeintegration":false,
+  "icon":"globe"
+}
