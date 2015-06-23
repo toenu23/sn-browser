@@ -92,7 +92,7 @@ module.exports = function(cb) {
         callback();
         return   console.log(e.message);
       }
-      if (data.active && dir !== 'home' && dir  !== 'apps') {
+      if (data.active && dir !== 'home' && dir !== 'apps') {
         data.id = dir;
         apps.push(data);
         callback();

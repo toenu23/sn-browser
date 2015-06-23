@@ -14,7 +14,7 @@ var appController = function($scope, $timeout) {
   });
 
   $scope.openApp = function(app) {
-    ipc.sendToHost('app-launch', app);
+    ipc.sendToHost('appLaunch', app);
   };
 };
 

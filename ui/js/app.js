@@ -29,6 +29,35 @@ var appController = function($scope, $timeout, $sce) {
     }, 20);
   };
 
+  $scope.openTab = function(app) {
+
+    if (typeof app !== 'object') {
+      try {
+        appInfo = require('../apps/' + app + '/manifest.json');
+        appInfo.id = app;
+        app = appInfo;
+      } catch(e) {
+        console.log(e.message);
+        return;
+      }
+    }
+
+    // Use current timestamp as tab id
+    var date = new Date();
+    var millis = date.getTime();
+
+    var tab = {
+      id: millis.toString(),
+      title: app.name,
+      manifest: app,
+    };
+    if (!tab.manifest.icon) {
+      tab.favicon = '../apps/' + tab.manifest.id + '/favicon.ico';
+    }
+    $scope.tabs.push(tab);
+    $scope.selectTab(tab.id);
+  };
+
   $scope.closeTab = function(tabId) {
     var index = getTabIndex(tabId);
     if ($scope.selectedTab == tabId) {
@@ -115,7 +144,7 @@ var webviewInit = function($timeout) {
     // IPC messages
     webview.addEventListener('ipc-message', ipcHandler);
 
-    webview.openDevTools();
+    //webview.openDevTools();
 
     // Webview logged a message
     webview.addEventListener('console-message', function(e) {
@@ -132,24 +161,8 @@ var webviewInit = function($timeout) {
 
   var ipcHandler = function(e) {
     $timeout(function() {
-      // App is launched from within webview
-      if (e.channel == 'app-launch') {
-        appInfo = e.args[0];
-
-        // Use current timestamp as tab id
-        var date = new Date();
-        var millis = date.getTime();
-
-        var tab = {
-          id: millis.toString(),
-          title: appInfo.name,
-          manifest: appInfo,
-        };
-        if (!tab.manifest.icon) {
-          tab.favicon = '../apps/' + tab.manifest.id + '/favicon.ico';
-        }
-        $scope.tabs.push(tab);
-        $scope.selectTab(tab.id);
+      if (e.channel == 'appLaunch') {
+        $scope.openTab(e.args[0]);
 
       } else if (e.channel == 'setTitle') {
         $scope.setTitle(webview.id, e.args[0]);
@@ -162,7 +175,6 @@ var webviewInit = function($timeout) {
 
       } else if (e.channel == 'setFavicon') {
         $scope.setFavicon(webview.id, e.args[0]);
-
       }
     });
   };
