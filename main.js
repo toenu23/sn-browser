@@ -1,8 +1,10 @@
 var app = require('app');
+var ipc = require('ipc');
 var BrowserWindow = require('browser-window');
 var Log = require('log');
 var log = new Log();
 var mainWindow = null;
+var baseUrl = 'file://' + __dirname + '/ui/';
 
 app.on('ready', function() {
 
@@ -12,14 +14,30 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow({
     width: size.width,
     height: size.height,
-    icon: __dirname + '/ui/img/logo-supernet-white.png',
+//    width: 400,
+//    height: 400,
+    icon: __dirname + '/ui/img/logo.png',
   });
 
-  mainWindow.loadUrl('file://' + __dirname + '/ui/index.html');
+  //mainWindow.loadUrl(baseUrl + 'start.html');
+  mainWindow.loadUrl(baseUrl + 'index.html');
 
   mainWindow.on('closed', function() {
     mainWindow = null;
   });
+
+  ipc.on('appConnect', function(args) {
+    console.log(args);
+    mainWindow.close();
+    mainWindow = null;
+    mainWindow = new BrowserWindow({
+      width: size.width,
+      height: size.height,
+      icon: __dirname + '/ui/img/logo.png',
+    });
+    mainWindow.loadUrl(baseUrl + 'index.html');
+  });
+
 });
 
 app.on('window-all-closed', function() {

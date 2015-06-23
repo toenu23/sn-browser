@@ -125,6 +125,10 @@
   background-position: 35px 23px;
 }
 
+.sidebar-navicon {
+  margin-right: 7px;
+}
+
 .sidebar-icon {
   margin-right: 18px;
 }

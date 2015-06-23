@@ -40,6 +40,34 @@ var appController = function($scope, $timeout, $sce) {
     $scope.tabs.splice(index, 1);
   };
 
+  $scope.setTitle = function(tabId, text) {
+    var index = getTabIndex(tabId);
+    if ($scope.tabs[index]) {
+      $scope.tabs[index].title = text;
+    }
+  };
+
+  $scope.setSubtitle = function(tabId, text) {
+    var index = getTabIndex(tabId);
+    if ($scope.tabs[index]) {
+      $scope.tabs[index].subtitle = text;
+    }
+  };
+
+  $scope.setIcon = function(tabId, icon) {
+    var index = getTabIndex(tabId);
+    if ($scope.tabs[index] && $scope.tabs[index].manifest) {
+      $scope.tabs[index].manifest.icon = icon;
+    }
+  };
+
+  $scope.setFavicon = function(tabId, url) {
+    var index = getTabIndex(tabId);
+    if ($scope.tabs[index]) {
+      $scope.tabs[index].favicon = url;
+    }
+  };
+
   var getTabIndex = function(tabId) {
     for (var k in $scope.tabs) {
       if ($scope.tabs[k].id == tabId) {
@@ -87,7 +115,7 @@ var webviewInit = function($timeout) {
     // IPC messages
     webview.addEventListener('ipc-message', ipcHandler);
 
-    //webview.openDevTools();
+    webview.openDevTools();
 
     // Webview logged a message
     webview.addEventListener('console-message', function(e) {
@@ -98,6 +126,8 @@ var webviewInit = function($timeout) {
     webview.addEventListener('new-window', function(e) {
       require('shell').openExternal(e.url);
     });
+
+    webview.send('appReady');
   };
 
   var ipcHandler = function(e) {
@@ -120,6 +150,19 @@ var webviewInit = function($timeout) {
         }
         $scope.tabs.push(tab);
         $scope.selectTab(tab.id);
+
+      } else if (e.channel == 'setTitle') {
+        $scope.setTitle(webview.id, e.args[0]);
+
+      } else if (e.channel == 'setSubtitle') {
+        $scope.setSubtitle(webview.id, e.args[0]);
+
+      } else if (e.channel == 'setIcon') {
+        $scope.setIcon(webview.id, e.args[0]);
+
+      } else if (e.channel == 'setFavicon') {
+        $scope.setFavicon(webview.id, e.args[0]);
+
       }
     });
   };
@@ -129,9 +172,7 @@ var webviewInit = function($timeout) {
       $scope = scope;
       element.bind('dom-ready', function() {
         webview = this;
-        $timeout(function() {
-          webviewReady();
-        });
+        $timeout(webviewReady);
       });
     },
   };

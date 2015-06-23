@@ -28,8 +28,8 @@
           <li class="sidebar-brand">
             <a href="#menu-toggle" id="menu-toggle">
               <div class="sidebar-title sidebar-logo"></div>
-              <div><!--<span class="glyphicon glyphicon-menu-hamburger"></span>-->
-                <span class="fa fa-fw fa-bars fa-lg" style="margin-right:7px;"></span>
+              <div>
+                <span class="fa fa-fw fa-bars fa-lg sidebar-navicon"></span>
               </div>
             </a>
           </li>
@@ -59,9 +59,11 @@
           <div ng-repeat="tab in tabs" class="row">
             <div ng-show="tab.id == selectedTab" class="col-lg-12 content-wrapper">
               <webview ng-if="tab.manifest.nodeintegration" id="{{ tab.id }}" src="{{ getTabSrc(tab) }}"
-                       class="content-frame" webviewinit nodeintegration></webview>
+                       preload="../lib/preload.js" class="content-frame" webviewinit nodeintegration>
+              </webview>
               <webview ng-if="!tab.manifest.nodeintegration" id="{{ tab.id }}" src="{{ getTabSrc(tab) }}"
-                       class="content-frame" webviewinit></webview>
+                       preload="../lib/preload.js" class="content-frame" webviewinit>
+              </webview>
             </div>
           </div>
         </div>
