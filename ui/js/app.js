@@ -30,7 +30,6 @@ var appController = function($scope, $timeout, $sce) {
   };
 
   $scope.openTab = function(app) {
-
     if (typeof app !== 'object') {
       try {
         appInfo = require('../apps/' + app + '/manifest.json');
@@ -144,7 +143,7 @@ var webviewInit = function($timeout) {
     // IPC messages
     webview.addEventListener('ipc-message', ipcHandler);
 
-    //webview.openDevTools();
+    webview.openDevTools();
 
     // Webview logged a message
     webview.addEventListener('console-message', function(e) {
