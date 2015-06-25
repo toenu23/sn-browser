@@ -1,6 +1,8 @@
 {
   "id":"apps",
-  "name":"Apps",
+  "name":{
+    "en":"Apps"
+  },
   "description":"List of apps",
   "active":true,
   "version":"v0.1",

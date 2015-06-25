@@ -1,9 +1,16 @@
 var ipc = require('ipc');
 var appLoader = require('./js/app_loader');
 
-var app = angular.module('MainApp', []);
+var dependencies = [
+  'pascalprecht.translate',
+  'ngCookies',
+];
 
-var appController = function($scope, $timeout) {
+var app = angular.module('MainApp', dependencies);
+
+var appController = function($scope, $timeout, $translate) {
+
+  var lang = $translate.use();
 
   $scope.apps = [];
 
@@ -13,6 +20,15 @@ var appController = function($scope, $timeout) {
     });
   });
 
+  $scope.getAppText = function(text) {
+    if (typeof text === 'object') {
+      text = text[lang]
+        ? text[lang]
+        : text['en'];
+    }
+    return text;
+  };
+
   $scope.openApp = function(app) {
     ipc.sendToHost('appLaunch', app);
   };
@@ -21,6 +37,7 @@ var appController = function($scope, $timeout) {
 var ctrlArgs = [
   '$scope',
   '$timeout',
+  '$translate',
   appController,
 ];
 

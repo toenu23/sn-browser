@@ -1,6 +1,8 @@
 {
   "id":"home",
-  "name":"Home",
+  "name":{
+    "en":"Home"
+  },
   "description":"SuperNET Multiwallet",
   "active":true,
   "version":"v0.1",

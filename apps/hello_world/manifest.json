@@ -1,6 +1,10 @@
 {
-  "name":"Hello World",
-  "description":"Hello World App",
+  "name":{
+    "en":"Hello World"
+  },
+  "description":{
+    "en":"Hello World Example"
+  },
   "active":true,
   "version":"v0.1",
   "author":"toenu",

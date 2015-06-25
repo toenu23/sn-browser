@@ -85,6 +85,17 @@ var appController = function($scope, $timeout, $translate, $sce) {
   
   });
 
+  var lang = $translate.use();
+
+  // Get App name by language, default to english
+  var getAppName = function(name) {
+    if (typeof name === 'object') {
+      name = name[lang]
+        ? name[lang]
+        : name['en'];
+    }
+    return name;
+  };
 
   $scope.selectedTab = 'home';
 
@@ -125,9 +136,11 @@ var appController = function($scope, $timeout, $translate, $sce) {
     var date = new Date();
     var millis = date.getTime();
 
+    var name = getAppName(app.name);
+
     var tab = {
       id: millis.toString(),
-      title: app.name,
+      title: name,
       manifest: app,
     };
     if (!tab.manifest.icon) {
@@ -187,13 +200,13 @@ var appController = function($scope, $timeout, $translate, $sce) {
   $scope.tabs = [
     {
       id: 'home',
-      title: appHome.name,
+      title: getAppName(appHome.name),
       isUncloseable: true,
       manifest: appHome,
     },
     {
       id: 'apps',
-      title: appApps.name,
+      title: getAppName(appApps.name),
       isUncloseable: true,
       manifest: appApps,
     },
@@ -210,7 +223,6 @@ var ctrlArgs = [
 
 app.controller('TabsCtrl', ctrlArgs);
 
-
 // Webview initialization
 // This directive handles events emitted
 // from within a webview (app)
@@ -224,7 +236,7 @@ var webviewInit = function($timeout) {
     // IPC messages
     webview.addEventListener('ipc-message', ipcHandler);
 
-    webview.openDevTools();
+    //webview.openDevTools();
 
     // Webview logged a message
     webview.addEventListener('console-message', function(e) {
