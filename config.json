@@ -1,0 +1,13 @@
+{
+  "supernet": {
+    "protocol": "http",
+    "hostname": "127.0.0.1",
+    "port": 7777
+  },
+  "nxt": {
+    "ssl": false,
+    "protocol": "http",
+    "hostname": "127.0.0.1",
+    "port": 7876
+  }
+}
