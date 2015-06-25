@@ -1,0 +1,8 @@
+{
+  "name":"Nxt Client",
+  "description":"Display the default Nxt client",
+  "active":true,
+  "version":"v0.1",
+  "website":"http://nowebsite.xyz",
+  "nodeintegration":false
+}

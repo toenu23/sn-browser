@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <style type="text/css">
+      html, body {
+        height:100%;
+        overflow:hidden;
+        margin:0;
+      }
+    </style>
+    <script type="text/javascript">
+      var app = new App();
+      app.ready(function() {
+        var frame = document.getElementById('contentFrame');
+        var nxtUrl = app.getNxtClientUrl();
+        frame.setAttribute('src', nxtUrl);
+      });
+    </script>
+  </head>
+
+  <body>
+
+    <iframe id="contentFrame" src="" style="border: 0; margin: 0; padding: 0; height: 100%; width:100%; overflow: hidden;"></iframe>
+
+  </body>
+</html>
