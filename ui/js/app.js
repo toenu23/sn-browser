@@ -1,10 +1,90 @@
+var remote = require('remote');
+var Menu = remote.require('menu');
+var currentWindow = remote.getCurrentWindow();
+
 // Load meta info of default apps
 var appHome = require('../apps/home/manifest.json');
 var appApps = require('../apps/apps/manifest.json');
 
-var app = angular.module('MainApp', []);
+var dependencies = [
+  'pascalprecht.translate',
+  'ngCookies',
+];
 
-var appController = function($scope, $timeout, $sce) {
+var app = angular.module('MainApp', dependencies);
+
+// Load translations
+app.config(function($translateProvider, $translatePartialLoaderProvider) {
+
+  $translatePartialLoaderProvider.addPart('app');
+  $translateProvider.useLoader('$translatePartialLoader', {
+    urlTemplate: './messages/{part}/{lang}.json',
+  });
+
+  $translateProvider.preferredLanguage('en');
+  $translateProvider.useLocalStorage();
+  $translateProvider.useSanitizeValueStrategy(null);
+
+});
+
+var appController = function($scope, $timeout, $translate, $sce) {
+
+  var messageStrings = [
+    'MENU_VIEW',
+    'MENU_RELOAD',
+    'MENU_FULLSCREEN',
+    'MENU_DEVTOOLS',
+    'MENU_HELP',
+    'MENU_ABOUT',
+  ];
+
+  $translate(messageStrings).then(function(translations) {
+
+    var template = [
+      {
+        label: translations.MENU_VIEW,
+        submenu: [
+          {
+            label: translations.MENU_RELOAD,
+            accelerator: 'Ctrl+R',
+            click: function() {
+              currentWindow.reload();
+            },
+          },
+          {
+            label: translations.MENU_FULLSCREEN,
+            accelerator: 'F11',
+            click: function() {
+              currentWindow.setFullScreen(
+                !currentWindow.isFullScreen()
+              );
+            },
+          },
+          {
+            label: translations.MENU_DEVTOOLS,
+            accelerator: 'Alt+Ctrl+I',
+            click: function() {
+              currentWindow.toggleDevTools();
+            },
+          },
+        ],
+      },
+      {
+        label: translations.MENU_HELP,
+        submenu: [
+          {
+            label: translations.MENU_ABOUT,
+            click: function() {},
+          },
+        ],
+      },
+    ];
+
+    menu = Menu.buildFromTemplate(template);
+    Menu.setApplicationMenu(menu);
+  
+  });
+
 
   $scope.selectedTab = 'home';
 
@@ -123,6 +203,7 @@ var appController = function($scope, $timeout, $sce) {
 var ctrlArgs = [
   '$scope',
   '$timeout',
+  '$translate',
   '$sce',
   appController,
 ];
