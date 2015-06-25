@@ -1,4 +1,5 @@
 var ipc = require('ipc');
+var url = require('url');
 var appLoader = require('./js/app_loader');
 
 var dependencies = [
@@ -15,6 +16,19 @@ var appController = function($scope, $timeout, $translate) {
   $scope.apps = [];
 
   appLoader(function(data) {
+
+    for (i = 0; i < data.length; i++) {
+      if (!data[i].image) {
+        data[i].image = './img/placeholder.jpg';
+        continue;
+      }
+      var image = url.parse(data[i].image);
+      // Relative URL
+      if (!image.protocol) {
+        data[i].image = '../' + data[i].id + '/' + data[i].image;
+      }
+    }
+
     $timeout(function() {
       $scope.apps = data;
     });

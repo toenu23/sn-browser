@@ -5,6 +5,5 @@
   "version":"v0.1",
   "author":"",
   "website":"",
-  "nodeintegration":false,
-  "icon":"shopping-cart"
+  "nodeintegration":false
 }

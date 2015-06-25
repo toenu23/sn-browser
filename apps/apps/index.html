@@ -25,7 +25,9 @@
       <div class="row apps-row">
         <div class="apps-item" ng-repeat="app in apps" ng-click="openApp(app)">
           <div class="well">
-            <p class="text-center"><img src="http://placehold.it/250x150" class="img-thumbnail" /></p>
+            <p class="text-center">
+              <img src="{{ app.image }}" class="img-thumbnail" />
+            </p>
               <h4><a href>{{ getAppText(app.name) }}</a></h4>
               <p>{{ getAppText(app.description) }}</p>
           </div>
