@@ -41,12 +41,20 @@ $(document).ready(function() {
   $('#nxtRequestForm').submit(function(e) {
     e.preventDefault();
     app.nxt({ requestType: 'getState' }, function(err, resp) {
-      console.log(err);
-      console.log(resp);
       $('#nxtRequestResult').val(JSON.stringify(resp));
     });
   });
 
+  $('#taggedDataForm').submit(function(e) {
+    e.preventDefault();
+    var txid = $('#taggedData').val();
+    app.getTaggedDataAsUri(txid, function(err, uri) {
+      console.log(err);
+      console.log(uri);
+      $('#taggedDataResult').attr('src', uri);
+      $('#taggedDataResult').show();
+    });
+  });
 });
 </script>
 </head>
@@ -88,6 +96,15 @@ $(document).ready(function() {
     <form class="panel-body form-inline" id="nxtRequestForm">
       <button type="submit" class="btn btn-default">NXT API Request</button>
       <textarea rows=3 class="form-control" id="nxtRequestResult"></textarea>
+    </form>
+  </div>
+
+  <div class="panel panel-default">
+    <form class="panel-body form-inline" id="taggedDataForm">
+      <p>Get tagged data as DataURI.</p>
+      <input class="form-control" type="text" id="taggedData" placeholder="Tagged Data ID" />
+      <button type="submit" class="btn btn-default">Submit</button>
+      <img src="" alt="" id="taggedDataResult" style="display:none;" />
     </form>
   </div>
 
