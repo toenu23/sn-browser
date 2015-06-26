@@ -19,6 +19,11 @@
     <link href="spn/css/modal/component.css" rel="stylesheet">
     <link rel="icon" href="spn/img/snicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="spn/css/font-supernet.css">
+
+    <script>
+      var app = new App();
+    </script>
+
 </head>
 <body class="lockscreen fixed">
     <div id="lockscreen">
@@ -822,7 +827,7 @@ at this moment.">
                 </li>
 
                 <li>
-                    <a id="advance_view" class="tooltip clickable" data-i18n="advance" data-i18n-tooltip="advance-tooltip" title="Opens the NRS style console
+                    <a onClick="app.launch('nxt')" class="tooltip clickable" data-i18n="advance" data-i18n-tooltip="advance-tooltip" title="Opens the NRS style console
 for advanced users.">ADVANCED</a>
                     <!--<a class="tooltip clickable" title="Opens the NRS style console
 for advanced users.">ADVANCED</a>-->
