@@ -5,6 +5,8 @@ var currentWindow = remote.getCurrentWindow();
 // Load meta info of default apps
 var appHome = require('../apps/home/manifest.json');
 var appApps = require('../apps/apps/manifest.json');
+var appProjects = require('../apps/projects/manifest.json');
+var appServices = require('../apps/services/manifest.json');
 
 var dependencies = [
   'pascalprecht.translate',
@@ -100,13 +102,27 @@ var appController = function($scope, $timeout, $translate, $sce) {
   $scope.selectedTab = 'home';
 
   $scope.loggedIn = function(account) {
-    var tab = {
+    var apps = {
       id: 'apps',
       title: getAppName(appApps.name),
       isUncloseable: true,
       manifest: appApps,
     };
-    $scope.tabs.push(tab);
+    var projects = {
+      id: 'projects',
+      title: getAppName(appProjects.name),
+      isUncloseable: true,
+      manifest: appProjects,
+    };
+    var services = {
+      id: 'services',
+      title: getAppName(appServices.name),
+      isUncloseable: true,
+      manifest: appServices,
+    };
+    $scope.tabs.push(apps);
+    $scope.tabs.push(projects);
+    $scope.tabs.push(services);
   };
 
   $scope.getTabSrc = function(tab) {

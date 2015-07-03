@@ -5,6 +5,13 @@ module.exports = function(cb) {
   var apps = [];
   var baseDir = __dirname + '/../../';
 
+  var defaultApps = [
+    'home',
+    'apps',
+    'projects',
+    'services'
+  ];
+
   /*
    * Get available apps
    */
@@ -90,9 +97,10 @@ module.exports = function(cb) {
         data = JSON.parse(data);
       } catch (e) {
         callback();
-        return   console.log(e.message);
+        console.log(e.message);
+        return;
       }
-      if (data.active && dir !== 'home' && dir !== 'apps') {
+      if (data.active && defaultApps.indexOf(dir) == -1) {
         data.id = dir;
         apps.push(data);
         callback();

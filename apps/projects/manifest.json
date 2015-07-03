@@ -1,0 +1,12 @@
+{
+  "id":"projects",
+  "name":{
+    "en":"Projects"
+  },
+  "description":"SuperNET Projects",
+  "active":true,
+  "version":"v0.1",
+  "website":"https://supernet.org",
+  "nodeintegration":true,
+  "icon":"puzzle-piece"
+}
