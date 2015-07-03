@@ -290,6 +290,7 @@ var NRS = (function(NRS, $, undefined) {
 					NRS.getInitialTransactions();
 
 					NRS.spnInit();
+					app.loggedIn(NRS.accountRS);
 				});
 			});
 		});
@@ -330,6 +331,7 @@ var NRS = (function(NRS, $, undefined) {
 	        }
 
 	        NRS.spnInit();
+	        app.loggedIn(NRS.accountRS);
 	    });
 	}
 

@@ -39,7 +39,9 @@
               </div>
             </a>
           </li>
-          <li ng-repeat-start="tab in tabs" ng-mouseenter="tab._showclose = true" ng-mouseleave="tab._showclose = false">
+          <li ng-repeat-start="tab in tabs"
+              ng-mouseenter="tab._showclose = true"
+              ng-mouseleave="tab._showclose = false">
             <a href="javascript:void(0)" ng-click="selectTab(tab.id)" title="{{ tab.title }}">
               <div class="sidebar-title">
                 <div class="sidebar-closeicon" ng-click="closeTab(tab.id)" ng-show="tab._showclose && !tab.isUncloseable">

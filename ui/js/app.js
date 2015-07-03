@@ -99,6 +99,16 @@ var appController = function($scope, $timeout, $translate, $sce) {
 
   $scope.selectedTab = 'home';
 
+  $scope.loggedIn = function(account) {
+    var tab = {
+      id: 'apps',
+      title: getAppName(appApps.name),
+      isUncloseable: true,
+      manifest: appApps,
+    };
+    $scope.tabs.push(tab);
+  };
+
   $scope.getTabSrc = function(tab) {
     var file = tab.manifest.main
       ? '/' + tab.manifest.main
@@ -202,13 +212,8 @@ var appController = function($scope, $timeout, $translate, $sce) {
       id: 'home',
       title: getAppName(appHome.name),
       isUncloseable: true,
+      showBeforeLogin: true,
       manifest: appHome,
-    },
-    {
-      id: 'apps',
-      title: getAppName(appApps.name),
-      isUncloseable: true,
-      manifest: appApps,
     },
   ];
 };
@@ -255,6 +260,9 @@ var webviewInit = function($timeout) {
     $timeout(function() {
       if (e.channel == 'appLaunch') {
         $scope.openTab(e.args[0]);
+
+      } else if (e.channel == 'loggedIn') {
+        $scope.loggedIn(e.args[0]);
 
       } else if (e.channel == 'setTitle') {
         $scope.setTitle(webview.id, e.args[0]);
