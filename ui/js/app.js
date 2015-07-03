@@ -125,6 +125,18 @@ var appController = function($scope, $timeout, $translate, $sce) {
     $scope.tabs.push(services);
   };
 
+  $scope.loggedOut = function() {
+    $scope.tabs = [
+      {
+        id: 'home',
+        title: getAppName(appHome.name),
+        isUncloseable: true,
+        showBeforeLogin: true,
+        manifest: appHome,
+      },
+    ];
+  };
+
   $scope.getTabSrc = function(tab) {
     var file = tab.manifest.main
       ? '/' + tab.manifest.main
@@ -223,15 +235,7 @@ var appController = function($scope, $timeout, $translate, $sce) {
     }
   };
 
-  $scope.tabs = [
-    {
-      id: 'home',
-      title: getAppName(appHome.name),
-      isUncloseable: true,
-      showBeforeLogin: true,
-      manifest: appHome,
-    },
-  ];
+  $scope.loggedOut();
 };
 
 var ctrlArgs = [
@@ -279,6 +283,9 @@ var webviewInit = function($timeout) {
 
       } else if (e.channel == 'loggedIn') {
         $scope.loggedIn(e.args[0]);
+
+      } else if (e.channel == 'loggedOut') {
+        $scope.loggedOut();
 
       } else if (e.channel == 'setTitle') {
         $scope.setTitle(webview.id, e.args[0]);
